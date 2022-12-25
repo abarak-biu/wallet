@@ -1,6 +1,7 @@
 #include <chrono>
 #include <cstdio>
 #include <httplib/httplib.h>
+#include <keys/SeedPhraseGenerator.h>
 
 #define SERVER_CERT_FILE "./cert.pem"
 #define SERVER_PRIVATE_KEY_FILE "./key.pem"
@@ -58,6 +59,8 @@ std::string log(const Request &req, const Response &res) {
 }
 
 int main(void) {
+
+auto seedPhrase = SeedPhraseGenerator::generateSeedPhrase();
 #ifdef CPPHTTPLIB_OPENSSL_SUPPORT
   SSLServer svr(SERVER_CERT_FILE, SERVER_PRIVATE_KEY_FILE);
 #else
